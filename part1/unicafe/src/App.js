@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const Display = props => <div>{props.value} </div>
+const Display = props => <h1>{props.value} </h1>
 
 const Button = props => (
   <button onClick={props.handleClick}>
