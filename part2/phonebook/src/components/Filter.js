@@ -1,9 +1,10 @@
+
 const Filter = ({newSearch, handleNewSearch}) => {
- // console.log(value);
-  console.log(onChange);
+  console.log(newSearch);
+  console.log(handleNewSearch);
   return (
     <div>
-      filter shown with
+      filter shown with:  
        <input value={newSearch} onChange={handleNewSearch} />
     </div>
   )

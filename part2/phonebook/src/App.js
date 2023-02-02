@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import Filter from './components/filter'
+import Filter from './components/Filter'
+import PersonForm from './components/PersonForm'
+import Numbers from './components/Numbers'
+
 
 const App = () => {
   const [persons, setPersons] = useState([]) 
@@ -54,28 +57,16 @@ const App = () => {
       <h2>Phonebook</h2>      
 
         <Filter newSearch={newSearch} handleNewSearch={handleNewSearch}/>
-        <div>
-          #old_filter shown with <input value={newSearch} onChange={handleNewSearch} />
-        </div>
 
-      <h2>add a new number to phonebook</h2>
-      <form onSubmit={addName}>
-        <div>
-          name: <input value={newName} onChange={handleNameChange}/>
-        </div>
-        <div>
-          number: <input value={newNumber} onChange={handleNumberChange}/>
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
-      <h2>Numbers</h2>
-      <ul>
-        <ul>
-          {persons.filter(person => person.name.toLowerCase().includes(newSearch.toLowerCase())).map(person => <li key={person.name}>{person.name} {person.number}</li>)}
-        </ul>
-      </ul>
+      <h3>add a new number to phonebook</h3>
+
+        <PersonForm addName={addName} newName={newName} handleNameChange={handleNameChange}
+        newNumber={newNumber} handleNumberChange={handleNumberChange}/>
+
+      <h3>Numbers</h3>
+
+        <Numbers persons={persons} newSearch={newSearch} />
+
     </div>
   )
 }
