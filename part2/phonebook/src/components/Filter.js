@@ -1,7 +1,7 @@
 
 const Filter = ({newSearch, handleNewSearch}) => {
-  console.log(newSearch);
-  console.log(handleNewSearch);
+  //console.log(newSearch);
+  //console.log(handleNewSearch);
   return (
     <div>
       filter shown with:  
