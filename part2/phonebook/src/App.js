@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import personsServices from './services/persons'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Numbers from './components/Numbers'
@@ -11,6 +12,16 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [newSearch, setNewSearch] = useState('')
 
+  useEffect(() => {
+    personsServices
+      .getAll()
+      .then(initialPersons => {
+        console.log('promise fulfilled')
+        setPersons(initialPersons)
+      })
+  }, [])
+  console.log('render', persons.length, 'persons')
+  
   const addName = (event) => {
     event.preventDefault() 
     const personObject = {
@@ -21,10 +32,10 @@ const App = () => {
     persons.find(n => n.name === newName) ?
     alert(newName + ' is already added to phonebook')
     :
-    axios
-      .post(`http://localhost:3001/persons`, personObject)
-      .then(response => {
-        setPersons(persons.concat(response.data))
+    personsServices
+      .create(personObject)
+      .then(returnedPerson => {
+        setPersons(persons.concat(returnedPerson))
         setNewName('')
         setNewNumber('')
       })    
@@ -44,15 +55,7 @@ const App = () => {
     setNewSearch(event.target.value)
   }
 
-  useEffect(() => {
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        console.log('promise fulfilled')
-        setPersons(response.data)
-      })
-  }, [])
-  console.log('render', persons.length, 'persons')
+
 
   return (
     <div>
