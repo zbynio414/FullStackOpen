@@ -3,6 +3,7 @@ import Note from './components/Note'
 import noteService from './services/notes'
 import './index.css'
 import Notification from './components/Notification'
+import Fotter from './components/Footer'
 
 const App = (props) => {
   const [notes, setNotes] = useState([])
@@ -90,6 +91,7 @@ const App = (props) => {
         <input value={newNote} onChange={handleNoteChange} />
         <button type="submit">save</button>
       </form>
+      <Fotter/>
     </div>
   )
 }
