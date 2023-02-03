@@ -29,15 +29,29 @@ const App = () => {
         number: newNumber,
     }
 
-    persons.find(n => n.name === newName) ?
-    alert(newName + ' is already added to phonebook')
-    :
-    personsServices
-      .create(personObject)
-      .then(returnedPerson => {
-        setPersons(persons.concat(returnedPerson))
-        setNewName('')
-        setNewNumber('')
+    persons.find(p => p.name === newName) && 
+    window.confirm(newName + ' is already added to phonebook, replace the old number?') ?
+      {const modPersonObject = {
+        name: newName,
+        number: newNumber,
+        id: persons.find(p => p.name === newName).id
+      } 
+      personsServices
+        .update(modPersonObject.id, modPersonObject)
+        .then(returnedPerson =>{
+          setPersons(persons.map(p => p.id === returnedPerson.id ? returnedPerson : p))
+          setNewName('')
+          setNewNumber('')
+        })}
+
+      :
+
+      personsServices
+        .create(personObject)
+        .then(returnedPerson => {
+          setPersons(persons.concat(returnedPerson))
+          setNewName('')
+          setNewNumber('')
       })    
   }
 
