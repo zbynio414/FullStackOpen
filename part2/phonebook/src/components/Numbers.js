@@ -1,9 +1,11 @@
 
-const Numbers = ({persons, newSearch}) =>{
+const Numbers = ({person, removePerson}) =>{
     return(
     <ul>
         <ul>
-          {persons.filter(person => person.name.toLowerCase().includes(newSearch.toLowerCase())).map(person => <li key={person.name}>{person.name} {person.number}</li>)}
+          <li key={person.name}>{person.name} {person.number}
+          <button onClick={removePerson}>delete</button>
+          </li>
         </ul>
     </ul>
     )

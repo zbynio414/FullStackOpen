@@ -41,6 +41,16 @@ const App = () => {
       })    
   }
 
+  const removePerson = (name, id) => {
+    if (window.confirm(`delete ${name}?`)) {
+      personsServices
+        .remove(id)
+        .then(returnedPerson =>
+          setPersons(persons.filter(person => person.id!==id))
+        )
+    }
+  }
+
   const handleNameChange = (event) => {
     console.log(event.target.value)
     setNewName(event.target.value)
@@ -55,7 +65,10 @@ const App = () => {
     setNewSearch(event.target.value)
   }
 
-
+  const numbersToShow = 
+    persons
+    .filter(person => 
+      person.name.toLowerCase().includes(newSearch.toLowerCase()))
 
   return (
     <div>
@@ -69,9 +82,14 @@ const App = () => {
         newNumber={newNumber} handleNumberChange={handleNumberChange}/>
 
       <h3>Numbers</h3>
-
-        <Numbers persons={persons} newSearch={newSearch} />
-
+        <ul>
+          {numbersToShow.map(person => 
+          <Numbers 
+          key = {person.id}
+          person={person}
+          removePerson={()=>removePerson(person.name, person.id)}/>
+        )}
+        </ul>
     </div>
   )
 }
