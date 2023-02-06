@@ -4,6 +4,7 @@ import personsServices from './services/persons'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Numbers from './components/Numbers'
+import Notification from './components/Notification'
 
 
 const App = () => {
@@ -11,6 +12,7 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [newSearch, setNewSearch] = useState('')
+  const [message, setMessage] = useState('')
 
   useEffect(() => {
     personsServices
@@ -29,22 +31,24 @@ const App = () => {
         number: newNumber,
     }
 
-    persons.find(p => p.name === newName) && 
-    window.confirm(newName + ' is already added to phonebook, replace the old number?') ?
-      {const modPersonObject = {
+   if (persons.find(p => p.name === newName)) { 
+    const modPersonObject = {
         name: newName,
         number: newNumber,
         id: persons.find(p => p.name === newName).id
       } 
-      personsServices
-        .update(modPersonObject.id, modPersonObject)
-        .then(returnedPerson =>{
-          setPersons(persons.map(p => p.id === returnedPerson.id ? returnedPerson : p))
-          setNewName('')
-          setNewNumber('')
-        })}
 
-      :
+      if (window.confirm(newName + ' is already added to phonebook, replace the old number?')) {
+        personsServices
+          .update(modPersonObject.id, modPersonObject)
+          .then(returnedPerson =>{
+            setPersons(persons.map(p => p.id === returnedPerson.id ? returnedPerson : p))
+            setNewName('')
+            setNewNumber('')
+          })
+        }
+    }
+      else {
 
       personsServices
         .create(personObject)
@@ -52,7 +56,13 @@ const App = () => {
           setPersons(persons.concat(returnedPerson))
           setNewName('')
           setNewNumber('')
-      })    
+        })    
+      }
+  setMessage(`Added/changed &{personObject.name}`)  
+  setTimeout(() => {
+    setMessage(null)
+  }, 3000);    
+
   }
 
   const removePerson = (name, id) => {
