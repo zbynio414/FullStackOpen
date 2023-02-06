@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 import personsServices from './services/persons'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Numbers from './components/Numbers'
 import Notification from './components/Notification'
+import Error from './components/Error'
+import './index.css'
 
 
 const App = () => {
@@ -12,7 +13,8 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [newSearch, setNewSearch] = useState('')
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState(null)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
     personsServices
@@ -58,10 +60,10 @@ const App = () => {
           setNewNumber('')
         })    
       }
-  setMessage(`Added/changed &{personObject.name}`)  
+  setMessage(`Added/changed:  ${personObject.name}`)  
   setTimeout(() => {
     setMessage(null)
-  }, 3000);    
+  }, 5000);    
 
   }
 
@@ -70,8 +72,16 @@ const App = () => {
       personsServices
         .remove(id)
         .then(returnedPerson =>
-          setPersons(persons.filter(person => person.id!==id))
-        )
+          setPersons(persons.filter(person => person.id!==id)))
+        .then(returnedPerson => setMessage(`${name} has been deleted form server`),
+          setTimeout(() => {
+          setMessage(null)
+          }, 5000))
+        .catch(error => {
+          setError(`Information of ${name} has already been removed from server`)
+          setTimeout(() => {setError(null)}, 5000)
+          setPersons(persons.filter(person => person.id !== id))
+        })
     }
   }
 
@@ -97,6 +107,9 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>      
+
+        <Error message={error}/>
+        <Notification message={message}/>
 
         <Filter newSearch={newSearch} handleNewSearch={handleNewSearch}/>
 
