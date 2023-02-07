@@ -19,20 +19,22 @@ const Country = ({country}) => {
 
 
 const ShowCountry = ({countriesToShow}) => {
-    if (countriesToShow.length > 10) {
-     return( <div>Too many matches, specify another filter</div>)
-    }
-    else {
-      if (countriesToShow.length === 1) {
-        return(<Country country={countriesToShow[0]}/>)}
-      else {
-        return(
-          <ul>
-            {countriesToShow.map( country => <li key={country.cca3}>{country.name.common}</li>)}
-          </ul>
-        )
+  if (countriesToShow.length > 10) {
+    return( <div>Too many matches, specify another filter</div>)
+  };
+
+  if (countriesToShow.length === 1) {
+    return(<Country country={countriesToShow[0]}/>)};
+
+  return(
+    <ul>
+      {countriesToShow.map( country => 
+        <li key={country.cca3}>
+          {country.name.common} 
+        </li>)
       }
-    }
-  }
+    </ul>
+  )
+}
 
 export default ShowCountry
