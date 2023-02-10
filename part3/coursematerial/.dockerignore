@@ -1,0 +1,2 @@
+.env
+fly secrets set MONGODB_URI='mongodb+srv://fullstackopen:FullStackOpen@cluster0.yede1yf.mongodb.net/noteApp?retryWrites=true&w=majority'
