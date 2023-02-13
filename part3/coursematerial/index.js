@@ -29,7 +29,7 @@ const unknownEndpoint = (request, response) => {
 app.use(cors())
 app.use(express.json())
 app.use(requestLogger)
-app.use(errorHandler)
+app.use(express.static('build'))
 
 app.get('/api/notes', (request, response) => {
     Note.find({}).then(notes => {
@@ -94,6 +94,9 @@ app.put('/api/notes/:id', (request, response, next) => {
       response.json(updatedNote)
     })
     .catch(error => next(error))})
+
+app.use(unknownEndpoint)
+app.use(errorHandler)
 
 const PORT = process.env.PORT
 app.listen(PORT, () => {
