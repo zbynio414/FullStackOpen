@@ -59,6 +59,11 @@ const App = () => {
           setNewName('')
           setNewNumber('')
         })    
+        .catch(error => {
+          setError(`Person validation failed: ${error.response.date.error}`)
+          setTimeout(() => setError(null), 5000)
+          console.log(error.response.data.error)
+        })
       }
   setMessage(`Added/changed:  ${personObject.name}`)  
   setTimeout(() => {
