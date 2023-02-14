@@ -50,6 +50,11 @@ const App = () => {
             setMessage(`Changed:  ${personObject.name}`)  
             setTimeout(() => { setMessage(null) }, 5000)    
           })
+          .catch(error => {
+            setError(`Data validation failed: ${error.response.data.error}`);
+            setTimeout(() => setError(null), 8000);
+            console.log(error.response.data.error)
+        })
         }
     }
       else {
@@ -64,8 +69,8 @@ const App = () => {
           setTimeout(() => { setMessage(null) }, 5000);    
         })    
         .catch(error => {
-            setError(`Person validation failed: ${error.response.data.error}`);
-            setTimeout(() => setError(null), 5000);
+            setError(`Data validation failed: ${error.response.data.error}`);
+            setTimeout(() => setError(null), 8000);
             console.log(error.response.data.error)
         })
       }
