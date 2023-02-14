@@ -46,7 +46,9 @@ const App = () => {
           .then(returnedPerson =>{
             setPersons(persons.map(p => p.id === returnedPerson.id ? returnedPerson : p))
             setNewName('')
-            setNewNumber('')
+            setNewNumber('')  
+            setMessage(`Changed:  ${personObject.name}`)  
+            setTimeout(() => { setMessage(null) }, 5000)    
           })
         }
     }
@@ -58,19 +60,16 @@ const App = () => {
           setPersons(persons.concat(returnedPerson))
           setNewName('')
           setNewNumber('')
+          setMessage(`Added:  ${personObject.name}`)  
+          setTimeout(() => { setMessage(null) }, 5000);    
         })    
         .catch(error => {
-          setError(`Person validation failed: ${error.response.date.error}`)
-          setTimeout(() => setError(null), 5000)
-          console.log(error.response.data.error)
+            setError(`Person validation failed: ${error.response.data.error}`);
+            setTimeout(() => setError(null), 5000);
+            console.log(error.response.data.error)
         })
       }
-  setMessage(`Added/changed:  ${personObject.name}`)  
-  setTimeout(() => {
-    setMessage(null)
-  }, 5000);    
-
-  }
+    }    
 
   const removePerson = (name, id) => {
     if (window.confirm(`delete ${name}?`)) {
@@ -137,4 +136,3 @@ const App = () => {
 }
 
 export default App
-
