@@ -1,7 +1,20 @@
 const dummy = (blogs) => {
     return 1
   }
-  
-  module.exports = {
-    dummy
+
+const totalLikes = (listOfBlogs) => {
+  const reducer = (sum, item) => {
+    return sum + item.likes
   }
+
+  return listOfBlogs.reduce(reducer, 0)
+}  
+
+
+
+
+  module.exports = {
+    dummy,
+    totalLikes
+  }
+
