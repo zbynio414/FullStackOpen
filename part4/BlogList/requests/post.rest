@@ -2,7 +2,7 @@ POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
-    "title": "Ogień",
+    "title": "woda",
     "author": "Siekoś",
     "url": "www.cos.pl",
     "likes": 49
