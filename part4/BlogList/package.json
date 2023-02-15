@@ -1,0 +1,20 @@
+{
+  "name": "bloglist",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node indes.js",
+    "test": "echo \\'Error: ni test specified\\' && exit 1"
+  },
+  "author": "Zbigniew Kowalkowski",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mongoose": "^6.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
