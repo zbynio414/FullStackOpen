@@ -32,6 +32,31 @@ describe('id is defined', () => {
     })
 })
 
+describe('POST', () => {
+    test('add new blog', async () => {
+        const newBlog = {
+            title: 'NewBlogTest',
+            author: 'Tester',
+            url: 'www.test.com',
+            likes: 100
+        }
+
+        await api
+            .post('/api/blogs')
+            .send(newBlog)
+            .expect(201)
+            .expect('Content-Type', /application\/json/)
+        
+        const blogsAtEnd = await helper.blogsInDB()
+        expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length + 1)
+
+        const titles = blogsAtEnd.map( b => b.title)
+        expect(titles).toContain(
+            'NewBlogTest'
+        )
+    })
+})
+
 afterAll(async ()=> {
     await mongoose.connection.close()
 })
