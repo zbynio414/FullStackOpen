@@ -82,19 +82,20 @@ describe('change blog', () => {
     test('change nb of likes', async () => {
         const blogsAtStart = await helper.blogsInDB()
         const blogToChange = blogsAtStart[0]
-
+        //console.log(blogToChange);
         blogToChange.likes += 1
-
-        api
+        //console.log(blogToChange);
+        await api
             .put(`/api/blogs/${blogToChange.id}`)
-            .expect(201)
+            .send(blogToChange)
+            .expect(200)
         
         blogsAtEnd = await helper.blogsInDB()
 
-        changedBlog = blogsAtEnd.filter(b => b.id === blogToChange.id)
-        console.log(changedBlog[0])
+        changedBlog = blogsAtEnd.filter(b => b._id === blogToChange._id)
+        //console.log(changedBlog[0])
 
-        //expect(changedBlog[0].likes).toBe(blogToChange.likes)
+        expect(changedBlog[0].likes).toBe(blogToChange.likes)
 
     })
 })
