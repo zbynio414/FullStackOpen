@@ -64,7 +64,7 @@ const counterOnly = Object.values(blogCountByAuthor)
 console.log(counterOnly)
 const blogCountMax = Math.max(...counterOnly)
 console.log(blogCountMax);
-const filteredBloggers = blogCountByAuthor.filter( obj === )
+//const filteredBloggers = blogCountByAuthor.filter( obj === )
 //const indexOfMax = counterOnly.indexOf(Math.max(...counterOnly))
 //console.log(indexOfMax)
 //const bestBlogger = Object(blogCountByAuthor)[2] //object is not indexed
