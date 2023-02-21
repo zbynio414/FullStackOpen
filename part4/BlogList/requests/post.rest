@@ -7,3 +7,13 @@ Content-Type: application/json
     "url": "www.cos.pl",
     "likes": 49
 }
+
+####
+POST http://localhost:3003/api/users
+Content-Type: application/json
+
+{
+    "username": "root",
+    "name": "Superuser",
+    "password": "haslo"
+}
