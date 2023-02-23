@@ -15,6 +15,7 @@ beforeEach(async () => {
 })
 
 describe('request to /api/blogs and check JSON format', () => {
+  // eslint-disable-next-line jest/expect-expect
   test('JSON form /api/blogs', async () => {
     await api
       .get('/api/blogs')
@@ -41,6 +42,7 @@ describe('POST', () => {
       author: 'Tester',
       url: 'www.test.com',
       likes: 100,
+      userId: '63f4d191b814057ef556d358',
     }
 
     await api
@@ -94,6 +96,7 @@ describe('change blog', () => {
 
     const blogsAtEnd = await helper.blogsInDB()
 
+    // eslint-disable-next-line no-underscore-dangle
     const changedBlog = blogsAtEnd.filter((b) => b._id === blogToChange._id)
     // console.log(changedBlog[0])
 
