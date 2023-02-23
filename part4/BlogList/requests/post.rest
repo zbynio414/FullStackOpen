@@ -1,5 +1,6 @@
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJpZCI6IjYzZjRkMTkxYjgxNDA1N2VmNTU2ZDM1OCIsImlhdCI6MTY3NzE2NzEyOH0.IFuC06JRzuUI-5Rj_dalmHaL2irxnlH9YB3I4GHlXb0
 
 {
     "title": "woda",
