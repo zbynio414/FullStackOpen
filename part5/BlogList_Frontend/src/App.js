@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react'
+import LoginForm from './components/LoginForm'
 import Blog from './components/Blog'
+import BlogForm from './components/BlogForm'
 import Notification from './components/Notification'
+import Togglable from './components/Togglable'
 import blogService from './services/blogs'
 import loginService from './services/login'
 import './index.css'
@@ -76,32 +79,7 @@ const App = () => {
     setTimeout(() => setMessage(null), 5000)
   }
 
-  const loginForm = () => (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        <div>
-        username
-          <input
-          type='text'
-          value={username}
-          name='Username'
-          onChange={({target}) => setUsername(target.value)}
-          />
-        </div>
-        <div>
-        password
-          <input
-          type='password'
-          value={password}
-          name='Password'
-          onChange={({target}) => setPassword(target.value)}
-          />
-        </div>
-        <button type='submit'>login</button>
-      </form>
-    </div>
-  )
+
 
   const blogsList = () => (
     <div>
@@ -119,36 +97,35 @@ const App = () => {
     </div>
   )
 
-  const createBlogForm = () => (
-    <div>
-      <h2>Create new Blog entry</h2>
-      <form onSubmit={handleSendNewBlog}>
-        <div>
-          Title:
-          <input type='text' value={newTitle} name='Title' onChange={({target}) => setNewTitle(target.value)}/>
-        </div>
-        <div>
-          Author:
-          <input type='text' value={newAuthor} name='Author' onChange={({target}) => setNewAuthor(target.value)}/>
-        </div> 
-        <div>
-          Url:
-          <input type='text' value={newUrl} name='Url' onChange={({target}) => setNewUrl(target.value)}/>
-        </div>
-        <button type='submit'>create</button>
-      </form>
-    </div>
-
-  )
 
   return (
     <div>
       <h1>Blog List</h1>
       
       <Notification message={message}/>
-      {user === null && loginForm()}
+      {user === null && 
+        <LoginForm 
+          username={username}
+          password={password}
+          handleUsernameChange={({target}) => setUsername(target.value)}
+          handlePasswordChange={({target}) => setPassword(target.value)}
+          handleLogin={handleLogin}
+        />
+      }
       {user !== null && userInfo()}
-      {user !== null && createBlogForm()}
+      {user !== null && 
+        <Togglable buttonLabel="New blog">
+          <BlogForm
+            handleSendNewBlog={handleSendNewBlog}
+            newTitle={newTitle}
+            newAuthor={newAuthor}
+            newUrl={newUrl}
+            handleTitleChange={({target}) => setNewTitle(target.value)}
+            handleAuthorChange={({target}) => setNewAuthor(target.value)}
+            handleUrlChange={({target}) => setNewUrl(target.value)}
+            />
+        </Togglable>
+      }
       {user !== null && blogsList()}
 
     </div>
