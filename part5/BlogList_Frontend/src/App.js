@@ -74,6 +74,12 @@ const App = () => {
 
   const createBlog = async (newBlog) => {
     const returnedBlog = await blogService.create(newBlog)
+    const newUserField = {
+      id: returnedBlog.user,
+      name: user.name,
+      username: user.username,
+    }
+    returnedBlog.user = newUserField
     setBlogs(blogs.concat(returnedBlog))
     
     setMessage(`a new blog: ${returnedBlog.title} by ${returnedBlog.author} added`)
