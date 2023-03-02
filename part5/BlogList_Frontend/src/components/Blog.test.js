@@ -17,7 +17,7 @@ test('render blog content', () => {
     id: '63f76497852d7462fce98a75'
   }
 
-  render(<Blog blog={blog} />)
+  const { container } = render(<Blog blog={blog} isMine={true} />)
 
   const title = screen.getByText('TestTitle')
   expect(title).toBeDefined()
@@ -25,5 +25,8 @@ test('render blog content', () => {
   const author = screen.getByText('Tester')
   expect(author).toBeDefined()
 
-  // const url =
+  const url_likes = container.querySelector('.url_likes')
+
+  expect(url_likes).toHaveStyle('display: none')
+  expect(url_likes).toHaveStyle('display: none')
 })
