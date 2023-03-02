@@ -19,6 +19,11 @@ test('render blog content', () => {
 
   render(<Blog blog={blog} />)
 
-  const element = screen.getByText('TestTitle')
-  expect(element).toBeDefined
+  const title = screen.getByText('TestTitle')
+  expect(title).toBeDefined()
+
+  const author = screen.getByText('Tester')
+  expect(author).toBeDefined()
+
+  // const url =
 })
