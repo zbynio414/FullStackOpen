@@ -20,7 +20,7 @@ const Blog = ({ blog, addLike, remove, isMine }) => {
   const showWhenMine = { display: isMine ? '' : 'none' }
 
   return (
-    <div style={blogStyle}>
+    <div style={blogStyle} className='blog'>
       {blog.title}
       <button onClick={toggleVisibility}>{visible ? 'hide' : 'view' }</button>
       <div style={showWhenVisible}>
