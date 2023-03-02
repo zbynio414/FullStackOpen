@@ -11,13 +11,13 @@ const Blog = ({ blog, addLike, remove, isMine }) => {
 
   const [visible, setVisible] = useState(false)
 
-  const showWhenVisible = { display: visible ? '' : 'none'}
-  
+  const showWhenVisible = { display: visible ? '' : 'none' }
+
   const toggleVisibility = () => {
     setVisible(!visible)
-  } 
+  }
 
-  const showWhenMine = {display: isMine ? '' : 'none'}
+  const showWhenMine = { display: isMine ? '' : 'none' }
 
   return (
     <div style={blogStyle}>
@@ -25,7 +25,7 @@ const Blog = ({ blog, addLike, remove, isMine }) => {
       <button onClick={toggleVisibility}>{visible ? 'hide' : 'view' }</button>
       <div style={showWhenVisible}>
         <div>{blog.url}</div>
-        <div>Likes: {blog.likes} 
+        <div>Likes: {blog.likes}
           <button onClick={addLike}>like</button>
         </div>
         <div>{blog.author}</div>

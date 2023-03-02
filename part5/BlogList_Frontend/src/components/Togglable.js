@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useState, forwardRef } from 'react'
+import PtopTypes from 'prop-types'
 
-const Togglable = (props) => {
+const Togglable = forwardRef((props, ref) => {
   const [visible, setVisible] = useState(false)
 
   const hideWhenVisible = { display: visible ? 'none' : '' }
@@ -21,6 +22,12 @@ const Togglable = (props) => {
       </div>
     </div>
   )
+})
+
+Togglable.propTypes = {
+  buttonLabel: PtopTypes.string.isRequired
 }
+
+Togglable.displayName = 'Togglable'
 
 export default Togglable
