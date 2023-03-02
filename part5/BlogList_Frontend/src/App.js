@@ -74,7 +74,11 @@ const App = () => {
         <Blog 
         key={blog.id} 
         blog={blog} 
-        addLike={() => addLike(blog.id)} />
+        addLike={() => addLike(blog.id)} 
+        remove={() => removeBlog(blog.id)}
+        isMine={() => blog.user.username === user.username ? true : false}
+        />
+
       )}
     </div>
   )
@@ -98,7 +102,6 @@ const App = () => {
     
     setMessage(`a new blog: ${returnedBlog.title} by ${returnedBlog.author} added`)
     setTimeout(() => setMessage(null), 5000)
-
   }
 
   const addLike = async (id) => {
@@ -118,6 +121,14 @@ const App = () => {
     
     setMessage(`added like to: ${returnedBlog.title} by ${returnedBlog.author}`)
     setTimeout(() => setMessage(null), 5000)
+  }
+
+  const removeBlog = async (id) => {
+    const blog = blogs.find(b => b.id === id)
+    if (window.confirm(`Remove blog: ${blog.title}?`)) {
+      blogService.remove(id)
+      setBlogs(blogs.filter(blog => blog.id !== id))
+    }
   }
 
 
