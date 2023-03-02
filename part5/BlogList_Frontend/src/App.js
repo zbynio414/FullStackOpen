@@ -56,10 +56,21 @@ const App = () => {
     window.localStorage.clear()
   }
 
+  const fillUndifinedLikes = (blog) => {
+    if (blog.likes === undefined) {
+      blog.likes=0
+    }
+      return blog
+    }
+
+  const sortedBlogs = [...blogs]
+    .map(fillUndifinedLikes)
+    .sort((a, b) => b.likes - a.likes)
+
   const blogsList = () => (
     <div>
       <h2>Blogs</h2>
-      {blogs.map(blog =>
+      {sortedBlogs.map(blog =>
         <Blog 
         key={blog.id} 
         blog={blog} 
@@ -105,7 +116,7 @@ const App = () => {
     setBlogs(blogs.map( blog => blog.id === returnedBlog.id ? returnedBlog : blog))
 
     
-    setMessage(`changed blog: ${returnedBlog.title} by ${returnedBlog.author}`)
+    setMessage(`added like to: ${returnedBlog.title} by ${returnedBlog.author}`)
     setTimeout(() => setMessage(null), 5000)
   }
 
