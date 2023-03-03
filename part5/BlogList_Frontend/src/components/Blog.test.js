@@ -1,3 +1,4 @@
+/* eslint-disable testing-library/no-node-access */
 /* eslint-disable testing-library/no-container */
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
@@ -40,7 +41,7 @@ test('clicking the button show the url and author', async () => {
 
   const user = userEvent.setup()
 
-  render(
+  const { container } = render(
     <Blog blog={blog} isMine={true} togggleVisibility={mockHandler} />
   )
 
@@ -48,5 +49,8 @@ test('clicking the button show the url and author', async () => {
 
   await user.click(button)
 
-  expect(mockHandler.mock.calls).toHaveLength(1)
+  const url_likes = container.querySelector('.url_likes')
+
+  expect(url_likes).not.toHaveStyle('display: none')
+  expect(url_likes).not.toHaveStyle('display: none')
 })
