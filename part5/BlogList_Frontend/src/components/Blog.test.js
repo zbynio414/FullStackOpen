@@ -54,3 +54,21 @@ test('clicking the button show the url and author', async () => {
   expect(url_likes).not.toHaveStyle('display: none')
   expect(url_likes).not.toHaveStyle('display: none')
 })
+
+test('dubble like click call fn twice', async () => {
+  const mockAddLike = jest.fn()
+  const user = userEvent.setup()
+
+  render(
+    <Blog blog={blog} addLike={mockAddLike} isMine={true} />
+  )
+
+  const button = screen.getByText('view')
+  await user.click(button)
+
+  const likeButton = screen.getByText('like')
+  await user.click(likeButton)
+  await user.click(likeButton)
+
+  expect(mockAddLike.mock.calls).toHaveLength(2)
+})
