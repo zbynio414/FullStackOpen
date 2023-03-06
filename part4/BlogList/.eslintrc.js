@@ -5,7 +5,8 @@ module.exports = {
     commonjs: true,
     es2021: true,
     node: true,
-    // 'jest/globals': true,
+    'jest/globals': true,
+    'cypress/globals': true,
   },
   extends: [
     'airbnb-base',
@@ -48,5 +49,5 @@ module.exports = {
     'jest/prefer-to-have-length': 'warn',
     'jest/valid-expect': 'error'
   },
-  plugins: ['jest']
+  plugins: ['react', 'jest', 'cypress']
 }
