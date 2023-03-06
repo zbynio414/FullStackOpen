@@ -34,4 +34,21 @@ describe('Blog_List_App', function () {
         .and('have.css', 'border-style', 'solid')
     })
   })
+
+  describe('When logged in', function() {
+    beforeEach(function() {
+      cy.login({ username: 'zkowalkowski', password: 'haslo' })
+    })
+
+    it('A blog can be created', function() {
+      cy.contains('New blog').click()
+      cy.get('#input-title').type('test title')
+      cy.get('#input-author').type('test author')
+      cy.get('#input-url').type('test url')
+      cy.get('#create-blog-button').click()
+
+      // cy.contains('a new blog: test title by test author added')
+    })
+  })
+
 })
