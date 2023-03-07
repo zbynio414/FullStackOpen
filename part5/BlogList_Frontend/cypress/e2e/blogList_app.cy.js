@@ -37,11 +37,11 @@ describe('Blog_List_App', function () {
 
   describe('When logged in', function() {
     beforeEach(function() {
-      // fn login does not set the state in BlogList form with token
-      // cy.login({ username: 'zkowalkowski', password: 'haslo' })
-      cy.get('#username').type('zkowalkowski')
-      cy.get('#password').type('haslo')
-      cy.get('#login-button').click()
+      cy.login_ui({ username: 'zkowalkowski', password: 'haslo' })
+
+      // cy.get('#username').type('zkowalkowski')
+      // cy.get('#password').type('haslo')
+      // cy.get('#login-button').click()
     })
 
     it('A blog can be created', function() {
