@@ -53,6 +53,18 @@ describe('Blog_List_App', function () {
 
       cy.contains('a new blog: test title by test author added')
     })
+    it('A blog can be deleted', function() {
+      cy.contains('New blog').click()
+      cy.get('#input-title').type('test title')
+      cy.get('#input-author').type('test author')
+      cy.get('#input-url').type('test url')
+      cy.get('#create-blog-button').click()
+
+      cy.contains('view').click()
+      cy.contains('remove').click()
+
+      cy.get('html').not('test title')
+    })
   })
 
 })
