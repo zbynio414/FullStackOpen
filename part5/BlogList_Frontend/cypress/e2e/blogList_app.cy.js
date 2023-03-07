@@ -53,6 +53,22 @@ describe('Blog_List_App', function () {
 
       cy.contains('a new blog: test title by test author added')
     })
+
+    it('User can like a blog', function() {
+      // const blog = { title: 'like test title', author: 'like test author', url: 'like test url' }
+      // cy.createBlog(blog)
+
+      cy.contains('New blog').click()
+      cy.get('#input-title').type('test title')
+      cy.get('#input-author').type('test author')
+      cy.get('#input-url').type('test url')
+      cy.get('#create-blog-button').click()
+
+      cy.contains('button', 'view').click()
+      cy.contains('button', 'like').click()
+      cy.get('html').contains('1')
+    })
+
     it('A blog can be deleted', function() {
       cy.contains('New blog').click()
       cy.get('#input-title').type('test title')
