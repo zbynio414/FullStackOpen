@@ -104,7 +104,7 @@ describe('Blog_List_App', function () {
       cy.get('.blog').contains('remove').parent().should('have.css', 'display', 'none')
     })
 
-    it.only('desc blog order', function() {
+    it('desc blog order', function() {
       cy.contains('New blog').click()
       cy.get('#input-title').type('second')
       cy.get('#input-author').type('test author')
