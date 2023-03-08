@@ -78,7 +78,7 @@ const App = () => {
           blog={blog}
           addLike={() => addLike(blog.id)}
           remove={() => removeBlog(blog.id)}
-          isMine={() => blog.user.username === user.username ? true : false}
+          username={ user.username }
         />
 
       )}

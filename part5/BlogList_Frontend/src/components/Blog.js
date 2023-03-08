@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const Blog = ({ blog, addLike, remove, isMine }) => {
+const Blog = ({ blog, addLike, remove, username }) => {
   const blogStyle = {
     paddingTop:10,
     paddingLeft: 2,
@@ -10,6 +10,7 @@ const Blog = ({ blog, addLike, remove, isMine }) => {
   }
 
   const [visible, setVisible] = useState(false)
+  const [isMine ] = useState(blog.user.username === username ? true : false)
 
   const showWhenVisible = { display: visible ? '' : 'none' }
 
