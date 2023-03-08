@@ -52,7 +52,6 @@ const App = () => {
   }
 
   const handleLogOut = () => {
-    setBlogs([])
     blogService.setToken(null)
     setUser(null)
     window.localStorage.clear()
