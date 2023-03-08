@@ -14,8 +14,8 @@ describe('Blog_List_App', function () {
     cy.contains('Login')
   })
 
-  describe('Login',function() {
-    it('succeeds with correct credentials', function() {
+  describe('Login', function () {
+    it('succeeds with correct credentials', function () {
       cy.get('#username').type('zkowalkowski')
       cy.get('#password').type('haslo')
       cy.get('#login-button').click()
@@ -23,7 +23,7 @@ describe('Blog_List_App', function () {
       cy.contains('Zbigniew Kowalkowski logged in')
     })
 
-    it('fails with wrong credentials', function() {
+    it('fails with wrong credentials', function () {
       cy.get('#username').type('zkowalkowski')
       cy.get('#password').type('zlehaslo')
       cy.get('#login-button').click()
@@ -35,8 +35,8 @@ describe('Blog_List_App', function () {
     })
   })
 
-  describe('When logged in', function() {
-    beforeEach(function() {
+  describe('When logged in', function () {
+    beforeEach(function () {
       cy.login_ui({ username: 'zkowalkowski', password: 'haslo' })
 
       // cy.get('#username').type('zkowalkowski')
@@ -44,7 +44,7 @@ describe('Blog_List_App', function () {
       // cy.get('#login-button').click()
     })
 
-    it('A blog can be created', function() {
+    it('A blog can be created', function () {
       cy.contains('New blog').click()
       cy.get('#input-title').type('test title')
       cy.get('#input-author').type('test author')
@@ -54,7 +54,7 @@ describe('Blog_List_App', function () {
       cy.contains('a new blog: test title by test author added')
     })
 
-    it('User can like a blog', function() {
+    it('User can like a blog', function () {
       // const blog = { title: 'like test title', author: 'like test author', url: 'like test url' }
       // cy.createBlog(blog)
 
@@ -69,7 +69,7 @@ describe('Blog_List_App', function () {
       cy.get('html').contains('1')
     })
 
-    it('A blog can be deleted', function() {
+    it('A blog can be deleted', function () {
       cy.contains('New blog').click()
       cy.get('#input-title').type('test title')
       cy.get('#input-author').type('test author')
@@ -82,7 +82,7 @@ describe('Blog_List_App', function () {
       cy.get('html').not('test title')
     })
 
-    it.only('user that not create the blog is not possible to see remove buttor', function() {
+    it.only('user that not create the blog is not possible to see remove buttor', function () {
       cy.contains('New blog').click()
       cy.get('#input-title').type('test title')
       cy.get('#input-author').type('test author')
@@ -92,7 +92,7 @@ describe('Blog_List_App', function () {
 
       cy.contains('Logout').click()
       cy.get('h2').should('contain', 'Login')
-      const  user = {
+      const user = {
         name: 'test',
         username: 'testowy',
         password: 'haslo'
@@ -101,7 +101,7 @@ describe('Blog_List_App', function () {
       cy.login_ui({ username: user.username, password: user.password })
 
       cy.contains('view').click()
-      cy.get('.blog').should('not.contain', 'remove')
+      cy.get('.blog').contains('remove').parent().should('have.css', 'display', 'none')
     })
   })
 })
