@@ -81,6 +81,27 @@ describe('Blog_List_App', function () {
 
       cy.get('html').not('test title')
     })
-  })
 
+    it.only('user that not create the blog is not possible to see remove buttor', function() {
+      cy.contains('New blog').click()
+      cy.get('#input-title').type('test title')
+      cy.get('#input-author').type('test author')
+      cy.get('#input-url').type('test url')
+      cy.get('#create-blog-button').click()
+
+
+      cy.contains('Logout').click()
+      cy.get('h2').should('contain', 'Login')
+      const  user = {
+        name: 'test',
+        username: 'testowy',
+        password: 'haslo'
+      }
+      cy.createUser(user)
+      cy.login_ui({ username: user.username, password: user.password })
+
+      cy.contains('view').click()
+      cy.get('.blog').should('not.contain', 'remove')
+    })
+  })
 })
