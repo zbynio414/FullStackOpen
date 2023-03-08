@@ -82,7 +82,7 @@ describe('Blog_List_App', function () {
       cy.get('html').not('test title')
     })
 
-    it.only('user that not create the blog is not possible to see remove buttor', function () {
+    it('user that not create the blog is not possible to see remove buttor', function () {
       cy.contains('New blog').click()
       cy.get('#input-title').type('test title')
       cy.get('#input-author').type('test author')
@@ -102,6 +102,30 @@ describe('Blog_List_App', function () {
 
       cy.contains('view').click()
       cy.get('.blog').contains('remove').parent().should('have.css', 'display', 'none')
+    })
+
+    it.only('desc blog order', function() {
+      cy.contains('New blog').click()
+      cy.get('#input-title').type('second')
+      cy.get('#input-author').type('test author')
+      cy.get('#input-url').type('test url')
+      cy.get('#create-blog-button').click()
+
+      cy.contains('New blog').click()
+      cy.get('#input-title').type('first')
+      cy.get('#input-author').type('test author')
+      cy.get('#input-url').type('test url')
+      cy.get('#create-blog-button').click()
+
+      cy.get('.blog').contains('first').as('first')
+      cy.get('@first').contains('view').click()
+
+      cy.get('@first').contains('like').click()
+      cy.wait(500)
+      cy.get('@first').contains('like').click()
+
+      cy.get('.blog').eq(0).should('contain', 'first')
+      cy.get('.blog').eq(1).should('contain', 'second')
     })
   })
 })
