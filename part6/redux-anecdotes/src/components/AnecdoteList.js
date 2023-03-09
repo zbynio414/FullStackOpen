@@ -24,8 +24,6 @@ const Anecdotes = () => {
 
 
     return (
-        <div>
-          <h2>Anecdotes</h2>
           <ul>
             {sortedAnecdotes.map(anecdote =>
             <Anecdote
@@ -36,7 +34,6 @@ const Anecdotes = () => {
             />
             )}
           </ul>
-        </div>
     )
 }
 
