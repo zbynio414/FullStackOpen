@@ -1,7 +1,7 @@
 import deepFreeze from "deep-freeze"
 import anecdoteReducer from './anecdoteReducer'
 
-describe('anecdoreReducer', () => {
+describe('anecdoteReducer', () => {
     const initialState = [
         {
             content: 'test anecdote',
@@ -12,12 +12,13 @@ describe('anecdoreReducer', () => {
 
     test('voting action increase number', ()=> {
       const action = {
-        type: 'vote'
+        type: 'vote',
+        payload: {id: 1}
       } 
       const state = initialState
       deepFreeze(state)
       const newState = anecdoteReducer(state, action)
-      expect(newState).toContain({
+      expect(newState[0]).toEqual({
         content: 'test anecdote',
         id: 1,
         votes: 1
