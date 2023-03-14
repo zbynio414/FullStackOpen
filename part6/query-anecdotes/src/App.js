@@ -1,7 +1,7 @@
 import AnecdoteForm from './components/AnecdoteForm'
 import Notification from './components/Notification'
 import { useQuery } from "react-query";
-import { getAll, createNew } from './services/anecdotes'
+import { getAll } from './services/anecdotes'
 // import axios from "axios";
 
 const App = () => {
