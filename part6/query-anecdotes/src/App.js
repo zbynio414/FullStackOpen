@@ -1,7 +1,8 @@
 import AnecdoteForm from './components/AnecdoteForm'
 import Notification from './components/Notification'
 import { useQuery } from "react-query";
-import axios from "axios";
+import { getAll, createNew } from './services/anecdotes'
+// import axios from "axios";
 
 const App = () => {
 
@@ -15,7 +16,8 @@ const App = () => {
     error,
     data: anecdotes
   } = useQuery('anecdotes',
-    () => axios.get('http://localhost:3001/anecdotes').then(res => res.data)
+      getAll
+    // () => axios.get('http://localhost:3001/anecdotes').then(res => res.data)
   )
 
   let content 
