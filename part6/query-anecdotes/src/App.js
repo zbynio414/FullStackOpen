@@ -2,10 +2,11 @@ import AnecdoteForm from './components/AnecdoteForm'
 import Notification from './components/Notification'
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import { getAll, update } from './services/anecdotes'
-// import axios from "axios";
+import { useNotificationDispatch } from "./NotificationContext";
 
 const App = () => {
   const queryClient = useQueryClient()
+  const dispatchNotification = useNotificationDispatch()
 
   const voteAnecdoteMutation = useMutation(update, {
     onSuccess: () => {
@@ -14,6 +15,10 @@ const App = () => {
   })
   const handleVote = (anecdote) => {
     voteAnecdoteMutation.mutate({...anecdote, votes: anecdote.votes + 1 })
+    dispatchNotification({type: 'create', payload: `You have voted: '${anecdote.content}'`})
+    setTimeout(() => {
+      dispatchNotification({type: 'delete'})
+    }, 5000);
   }
 
   const { 
@@ -23,7 +28,6 @@ const App = () => {
     data: anecdotes
   } = useQuery('anecdotes',
       getAll
-    // () => axios.get('http://localhost:3001/anecdotes').then(res => res.data)
   )
 
   let content 
@@ -47,7 +51,7 @@ const App = () => {
 
   return (
     <div>
-      <h3>Anecdote app</h3>
+      <h3>Anecdote with React Query app</h3>
     
       <Notification />
       <AnecdoteForm />
