@@ -4,5 +4,5 @@ This repositorium contains exercises done during the [FullStackOpen](http://full
 
 ## Motivation
 
-Main idea is to learn most common technices used videly in virutal world.
+Main idea is to learn most common technics used videly in virutal world.
 After learning Python I desire more.
