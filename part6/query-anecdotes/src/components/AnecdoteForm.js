@@ -16,12 +16,14 @@ const AnecdoteForm = () => {
     event.preventDefault()
     const content = event.target.anecdote.value
     event.target.anecdote.value = ''
-    newAnecdoteMutation.mutate(content)
-    dispatchNotification({type: 'create', payload: `You have created '${content}'`})
+    newAnecdoteMutation.mutate(content, {
+      onSuccess: (response) => dispatchNotification({type: 'create', payload: `you have created new anecdote: '${response.content}'`}),
+      onError: () => dispatchNotification({type: 'create', payload: 'too short anecdote, must have length 5 or more'})
+    })
     setTimeout(() => {
       dispatchNotification({type: 'delete'})
-    }, 5000);
-}
+    }, 5000)   
+  }   
 
   return (
     <div>
