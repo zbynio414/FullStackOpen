@@ -1,0 +1,10 @@
+# fly.toml file generated for postgres-notes on 2023-03-20T18:18:24+01:00
+
+app = "postgres-notes"
+primary_region = "waw"
+
+[build]
+  builder = "heroku/buildpacks:20"
+
+[env]
+  PORT = "8080"
