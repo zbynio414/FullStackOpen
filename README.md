@@ -4,4 +4,4 @@ This repositorium contains exercises done during the [FullStackOpen](http://full
 
 ## Motivation
 
-Main idea is to learn most common techniques widely used in virutal world.
+Main idea is to learn most common techniques widely used.
