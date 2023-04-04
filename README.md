@@ -1,8 +1,7 @@
 # FullStackOpen
 
-This repositorium contains exercises done during the [FullStackOpen](http://fullstackopen.com/en) course of modern web development.
+This repositorium contains exercises done during the [FullStackOpen](http://fullstackopen.com/en) course of modern web development provided by University of Helsinki.
 
 ## Motivation
 
-Main idea is to learn most common technics used videly in virutal world.
-After learning Python I desire more.
+Main idea is to learn most common techniques widely used in virutal world.
