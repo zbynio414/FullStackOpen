@@ -22,5 +22,5 @@ To run this app:
 You need Nodejs v19.8
 
 - copy or fork repository
-- run npm install
-- run npm start
+- run ```npm install```
+- run ```npm start```
